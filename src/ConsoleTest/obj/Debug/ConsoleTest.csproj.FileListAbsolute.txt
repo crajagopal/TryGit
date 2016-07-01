@@ -9,4 +9,3 @@ C:\gitworkspaces\Test\trygit\src\ConsoleTest\obj\Debug\ConsoleTest.exe
 C:\gitworkspaces\Test\trygit\src\ConsoleTest\obj\Debug\ConsoleTest.pdb
 C:\gitworkspaces\Test\trygit\src\ConsoleTest\bin\Debug\ConsoleTest.exe
 C:\gitworkspaces\Test\trygit\src\ConsoleTest\bin\Debug\ConsoleTest.pdb
-C:\gitworkspaces\Test\trygit\src\ConsoleTest\obj\Debug\ConsoleTest.csprojResolveAssemblyReference.cache
