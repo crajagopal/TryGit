@@ -1,0 +1,12 @@
+C:\Projects\ConsoleTest\ConsoleTest\bin\Debug\ConsoleTest.exe.config
+C:\Projects\ConsoleTest\ConsoleTest\bin\Debug\ConsoleTest.exe
+C:\Projects\ConsoleTest\ConsoleTest\bin\Debug\ConsoleTest.pdb
+C:\Projects\ConsoleTest\ConsoleTest\obj\Debug\ConsoleTest.csprojResolveAssemblyReference.cache
+C:\Projects\ConsoleTest\ConsoleTest\obj\Debug\ConsoleTest.exe
+C:\Projects\ConsoleTest\ConsoleTest\obj\Debug\ConsoleTest.pdb
+C:\gitworkspaces\Test\trygit\src\ConsoleTest\bin\Debug\ConsoleTest.exe.config
+C:\gitworkspaces\Test\trygit\src\ConsoleTest\obj\Debug\ConsoleTest.exe
+C:\gitworkspaces\Test\trygit\src\ConsoleTest\obj\Debug\ConsoleTest.pdb
+C:\gitworkspaces\Test\trygit\src\ConsoleTest\bin\Debug\ConsoleTest.exe
+C:\gitworkspaces\Test\trygit\src\ConsoleTest\bin\Debug\ConsoleTest.pdb
+C:\gitworkspaces\Test\trygit\src\ConsoleTest\obj\Debug\ConsoleTest.csprojResolveAssemblyReference.cache
