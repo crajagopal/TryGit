@@ -32,6 +32,11 @@ namespace ConsoleTest
             } while (ans?.ToUpper() == "Y");
         }
 
+        /// <summary>
+        /// Word perumations
+        /// </summary>
+        /// <param name="word">The word.</param>
+        /// <returns></returns>
         private static long Permute(string word)
         {          
             var W = word.ToLower();
@@ -70,6 +75,11 @@ namespace ConsoleTest
 
         }
 
+        /// <summary>
+        /// Calculate factorial
+        /// </summary>
+        /// <param name="n">number</param>
+        /// <returns></returns>
         private static long Fact(int n)
         {
             if (n == 0 || n == 1)
@@ -77,7 +87,11 @@ namespace ConsoleTest
             return Fact(n - 1)*n;
         }
 
-
+        /// <summary>
+        /// Format a given decimal number
+        /// </summary>
+        /// <param name="Vnum">decimal number</param>
+        /// <returns></returns>
         private static string FormatTest(double Vnum)
         {
 
