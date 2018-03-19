@@ -1,18 +1,138 @@
 using System;
+using System.CodeDom.Compiler;
+using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data.Common;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using System.Xml.Schema;
 using static System.Console;
 
 namespace ConsoleTest
 {
     internal class Program
     {
+        
+
         private static void Main(string[] args)
         {
-           // Console.WriteLine(CalculateDiceRoll("2d5+3d7-12"));
-            Console.WriteLine(CalculateDiceRoll("2d5"));
+            // TestSortLexical();
+            A a = new A();
+            B b = new B(1234);
+
+            // Error CS1540, because x can only be accessed by
+            // classes derived from A.
+            //a.Val = 10; 
+
+            // OK, because this class derives from A.
+            //b.Val = 10;
+            Console.WriteLine(b.GetVal());
+        }
+
+        class A
+        {
+             private protected int Val  = 123;
+
+            public A()
+            {
+                Val = 1;
+            }
+
+            public A(int val)
+            {
+                Val = val;
+            }
+
+            public int GetVal()
+            {
+                return Val;
+            }
+        }
+
+        class B : A
+        { 
+            public B(int x)
+            {
+                Val = x;
+            }
+        }
+        private static string ReversePairs(string s)
+        {
+            
+            var result = "";
+            for (var i = s.Length-1; i > 0; i=i-2)
+            {
+                result += string.Concat(s[i-1],s[i]);
+            }
+            if (s.Length % 2 != 0)
+            {
+                result += s[0];
+            }
+             
+            return result;
+        }
+
+
+        public interface iface { }
+        public class x : iface { }
+        public class y : iface { }
+
+        public class XClass
+        {
+            private string _Name;
+
+            public XClass(string name1)
+            {
+                _Name = name1;
+            }
+
+            public string Name()
+            {
+                return _Name;
+            }
+
+            public void Name(string name)
+            {
+                _Name = name;
+            }
+        }
+
+
+        private static void Main2()
+        {
+            // TestSortLexical();
+            //WriteLine(ReversePairs("ABCDEF"));
+            //TestKnapSack();
+
+            //x a = new x();
+            //y b = new y();
+            ////x c = b;
+
+            //XClass a1 = new XClass("cg");
+            //XClass b1 = a1;
+            //b1.Name("and");
+            //WriteLine(a1.Name());
+            //WriteLine(b1.Name());
+
+            //if (a1 == b1)
+            //{
+            //    WriteLine("equal");
+            //}
+            //else { WriteLine("not");}
+
+            //if (a1.Equals(b1))
+            //{
+            //    WriteLine("equal");
+            //}
+            //else { WriteLine("not"); }
+
+
+            // Console.WriteLine(CalculateDiceRoll("2d5+3d7-12"));
+            //Console.WriteLine(CalculateDiceRoll("2d5"));
 
             //SeparateIntegers(new[] { 6, -7, 7, 1, -1, 2, 1, -5, -6 });
             //SeparateIntegers(new[] { 6, 7, 7, 1, 1, 2, 1, 5, 6 });
@@ -63,6 +183,132 @@ namespace ConsoleTest
                 }
                 WriteLine();
             }*/
+        }
+
+        private static void Testmethod()
+        {
+            /*
+             * 
+            string line = "hello world, def";
+            var lines = line.Split(',');
+            if (lines.Length > 1)
+            {
+                var input = lines[0];
+                var rep = lines[1].Trim();
+                var line2 = input.Where(c => !rep.ToCharArray().Contains(c)).ToArray();
+                Console.WriteLine(line2);
+            }
+            
+             * int input;
+            if (int.TryParse(line, out input))
+            {
+                var sum = 0;
+                for (int i = 1; i <= input; i++)
+                {
+                    if (i % 5 != 0 && i % 7 != 0)
+                    {
+                        sum += i;
+                    }
+                }
+                Console.WriteLine(sum);
+            }
+            else
+            {
+                Console.WriteLine("enter valid integer");
+            }
+            */
+            /* string x = "https://yahoo.com/movies/index.html?refresh=1";
+           Uri uri;
+           if (Uri.TryCreate(x, UriKind.Absolute, out uri))
+           {
+               var uriParts = new List<string>();
+               if (uri.Scheme.Length > 0)
+               uriParts.Add(uri.Scheme);
+               if (uri.Host.Length > 0)
+                   uriParts.Add(uri.Host);
+               if (uri.Query.Length > 0)
+                   uriParts.Add(uri.Query.Replace("?", ""));
+               var output = string.Join(",", uriParts);
+               Console.WriteLine(output);
+           }
+           else
+           {
+               Console.WriteLine("Enter valid uri");
+           }*/
+        }
+        private static void TestSortLexical()
+        {
+            var list = new List<string[]>
+            {
+                new[] {"Dog", "Golden Retriever", "Rex"},
+                new[] {"Cat", "Tabby", "Boblawblah"},
+                new[] {"Fish", "Clown", "Nemo"},
+                new[] {"Dog", "Pug", "Daisy"},
+                new[] {"Cat", "Siemese", "Wednesday"},
+                new[] {"Fish", "Gold", "Alaska"}
+            };
+            var newList = list.OrderBy(r => r[0])
+                .ThenBy(r => r[1])
+               // .ThenBy(r => r[2])
+                .ToList();
+            foreach (var arr in newList)
+            {
+                foreach (var str in arr)
+                {
+                    Console.Write($"{str}, ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        // A utility function that returns maximum of two integers
+        static int Max(int a, int b) { return (a > b) ? a : b; }
+
+        private static void TestKnapSack()
+        {
+            var values = new [] {60, 100, 120};
+            var weights = new[] {1, 2, 3 };
+            var targetWeight = 5;
+
+            var max = TestKnapSack(targetWeight, weights, values, values.Length);
+            WriteLine(max);
+        }
+
+        private static int TestKnapSack(int W1, int[] wt, int[] val, int n)
+        {
+            var k = new int[n + 1][];
+            for (var z = 0; z < n + 1; z++)
+            {
+                k[z] = new int[W1+1];
+            }
+
+            for (var i = 0; i <= n; i++)
+            {
+                for (var w = 0; w <= W1; w++)
+                {
+                    if (i == 0 || w == 0)
+                    {
+                        k[i][w] = 0;
+                    }
+                    else if (wt[i - 1] <= w)
+                    {
+                        k[i][w] = Max(val[i - 1] + k[i - 1][w - wt[i - 1]], k[i - 1][w]);
+                    }
+                    else
+                        k[i][w] = k[i - 1][w];
+                }
+            }
+
+            for (var i = 0; i <= n; i++)
+            {
+                for (var w = 0; w <= W1; w++)
+                {
+                    Write($"{k[i][w]}\t");
+                }
+                WriteLine();
+            }
+
+            return k[n][W1];
         }
 
         private static int CalculateDiceRoll(string input)
