@@ -15,12 +15,110 @@ using static System.Console;
 namespace ConsoleTest
 {
     internal class Program
-    {
-        
-
+    {        
         private static void Main(string[] args)
         {
-            // TestSortLexical();
+            TestSortLexicalLog();  
+            WriteLine();
+        }
+
+        private static void TestSortLexicalLog()
+        {
+            var list = new List<string[]>
+            {
+                new[] {"za1", "Dog", "Golden Retriever", "Rex"},
+                new[] {"ab1", "Dog", "Golden Retriever", "Rex"},
+                new[] {"af1", "25642", "356376"},
+                new[] {"cd1", "Cat", "Tabby", "Boblawblah"},
+                new[] {"f1", "Fish", "Clown", "Nemo"},
+                new[] {"rf2", "10", "20"},
+                new[] {"ad1", "Dog", "Pug", "Daisy"},
+                new[] {"rf21", "1", "2"},
+                new[] {"zc2", "Cat", "Siemese", "Wednesday"},
+                new[] {"f2", "Fish", "Gold", "Alaska"}
+            };
+            var intList = list.Where(item => int.TryParse(item[1], out _)).ToList();
+            var strLogMap = new Dictionary<string, string>();
+            var logList = list.Where(item => !int.TryParse(item[1], out _)).ToList();
+            logList.ForEach(item => strLogMap.Add(item[0], string.Join(string.Empty, item.Where(elem => item[0] != elem))+item[0]));
+
+            var logListFinal = strLogMap.OrderBy(item => item.Value).Select(elem => string.Join(",", list.First(items => items[0] == elem.Key))).ToList();
+            logListFinal.AddRange(intList.Select(elem => string.Join(",", elem)));
+
+            WriteLine("\nFinal output\n------------\n");
+
+            foreach (var item in logListFinal)
+            {
+                Write($"{item}");
+                WriteLine();
+            }
+
+            /*foreach (var arr in intList)
+            {
+                foreach (var str in arr)
+                {
+                    Write($"{str}, ");
+                }
+                WriteLine();
+            }
+            WriteLine("\nLogs\n------------\n");
+            foreach (var arr in logList)
+            {
+                foreach (var str in arr)
+                {
+                    Write($"{str}, ");
+                }
+                WriteLine();
+            }
+            WriteLine("\nMap\n------------\n");
+            foreach (var key in strLogMap.Keys)
+            {                                
+                Write($"{key} --> {strLogMap[key]}");                
+                WriteLine();
+            }
+
+            WriteLine("\nSorted Map\n------------\n");
+            foreach (var item in strLogMap.OrderBy(item=>item.Value))
+            {
+                Write($"{item.Key} --> {strLogMap[item.Key]}");
+                WriteLine();
+            }*/                        
+        }
+
+        private static void TestSortLexical()
+        {
+            var list = new List<string[]>
+            {
+                new[] {"za1", "Dog", "Golden Retriever", "Rex"},
+                new[] {"ab1", "Dog", "Golden Retriever", "Rex"},
+                new[] {"rf1", "25642", "356376"},
+                new[] {"Cat", "Tabby", "Boblawblah"},
+                new[] {"Fish", "Clown", "Nemo"},
+                new[] {"rf2", "10", "20"},
+                new[] {"Dog", "Pug", "Daisy"},
+                new[] {"rf21", "1", "2"},
+                new[] {"Cat", "Siemese", "Wednesday"},
+                new[] {"Fish", "Gold", "Alaska"}
+            };
+
+            //var newList = list.OrderBy(r => r[0])
+            //    //.ThenBy(r => r[1])
+            //    // .ThenBy(r => r[2])
+            //    .ToList();
+
+            var newList = list.OrderBy(s => string.Join(string.Empty, s)).ToList();
+            foreach (var arr in newList)
+            {
+                foreach (var str in arr)
+                {
+                    Console.Write($"{str}, ");
+                }
+                Console.WriteLine();
+            }
+        }
+
+        private static void TestProtectedMember(string s)
+        {
             A a = new A();
             B b = new B(1234);
 
@@ -33,33 +131,6 @@ namespace ConsoleTest
             Console.WriteLine(b.GetVal());
         }
 
-        class A
-        {
-             private protected int Val  = 123;
-
-            public A()
-            {
-                Val = 1;
-            }
-
-            public A(int val)
-            {
-                Val = val;
-            }
-
-            public int GetVal()
-            {
-                return Val;
-            }
-        }
-
-        class B : A
-        { 
-            public B(int x)
-            {
-                Val = x;
-            }
-        }
         private static string ReversePairs(string s)
         {
             
@@ -74,33 +145,7 @@ namespace ConsoleTest
             }
              
             return result;
-        }
-
-
-        public interface iface { }
-        public class x : iface { }
-        public class y : iface { }
-
-        public class XClass
-        {
-            private string _Name;
-
-            public XClass(string name1)
-            {
-                _Name = name1;
-            }
-
-            public string Name()
-            {
-                return _Name;
-            }
-
-            public void Name(string name)
-            {
-                _Name = name;
-            }
-        }
-
+        }     
 
         private static void Main2()
         {
@@ -185,39 +230,9 @@ namespace ConsoleTest
             }*/
         }
 
-        private static void Testmethod()
+        private static void TestUriParser()
         {
-            /*
-             * 
-            string line = "hello world, def";
-            var lines = line.Split(',');
-            if (lines.Length > 1)
-            {
-                var input = lines[0];
-                var rep = lines[1].Trim();
-                var line2 = input.Where(c => !rep.ToCharArray().Contains(c)).ToArray();
-                Console.WriteLine(line2);
-            }
-            
-             * int input;
-            if (int.TryParse(line, out input))
-            {
-                var sum = 0;
-                for (int i = 1; i <= input; i++)
-                {
-                    if (i % 5 != 0 && i % 7 != 0)
-                    {
-                        sum += i;
-                    }
-                }
-                Console.WriteLine(sum);
-            }
-            else
-            {
-                Console.WriteLine("enter valid integer");
-            }
-            */
-            /* string x = "https://yahoo.com/movies/index.html?refresh=1";
+           var x = "https://yahoo.com/movies/index.html?refresh=1";
            Uri uri;
            if (Uri.TryCreate(x, UriKind.Absolute, out uri))
            {
@@ -229,37 +244,50 @@ namespace ConsoleTest
                if (uri.Query.Length > 0)
                    uriParts.Add(uri.Query.Replace("?", ""));
                var output = string.Join(",", uriParts);
-               Console.WriteLine(output);
+               WriteLine(output);
            }
            else
            {
                Console.WriteLine("Enter valid uri");
-           }*/
+           }
         }
-        private static void TestSortLexical()
+
+        private static void TestRemoveCharsFromString()
+        {            
+            var line = "hello world, def";
+            var lines = line.Split(',');
+
+            if (lines.Length <= 1) return;
+
+            var input = lines[0];
+            var rep = lines[1].Trim();
+            var line2 = input.Where(c => !rep.ToCharArray().Contains(c)).ToArray();
+            WriteLine(line2);
+        }
+
+        private static void TestPrintSumWithExceptions()
         {
-            var list = new List<string[]>
+            var line = "10";
+            int input;
+            if (int.TryParse(line, out input))
             {
-                new[] {"Dog", "Golden Retriever", "Rex"},
-                new[] {"Cat", "Tabby", "Boblawblah"},
-                new[] {"Fish", "Clown", "Nemo"},
-                new[] {"Dog", "Pug", "Daisy"},
-                new[] {"Cat", "Siemese", "Wednesday"},
-                new[] {"Fish", "Gold", "Alaska"}
-            };
-            var newList = list.OrderBy(r => r[0])
-                .ThenBy(r => r[1])
-               // .ThenBy(r => r[2])
-                .ToList();
-            foreach (var arr in newList)
-            {
-                foreach (var str in arr)
+                var sum = 0;
+                for (int i = 1; i <= input; i++)
                 {
-                    Console.Write($"{str}, ");
+                    if (i % 5 != 0 && i % 7 != 0)
+                    {
+                        sum += i;
+                    }
                 }
-                Console.WriteLine();
+                WriteLine(sum);
             }
+            else
+            {
+                WriteLine("enter valid integer");
+            }            
         }
+
+       
 
         // A utility function that returns maximum of two integers
         static int Max(int a, int b) { return (a > b) ? a : b; }
@@ -863,5 +891,57 @@ namespace ConsoleTest
             }
         }
 
+
+        class A
+        {
+            protected int Val = 123;
+
+            public A()
+            {
+                Val = 1;
+            }
+
+            public A(int val)
+            {
+                Val = val;
+            }
+
+            public int GetVal()
+            {
+                return Val;
+            }
+        }
+
+        class B : A
+        {
+            public B(int x)
+            {
+                Val = x;
+            }
+        }
+
+        public interface IFace { }
+        public class X : IFace { }
+        public class Y : IFace { }
+
+        public class XClass
+        {
+            private string _name;
+
+            public XClass(string name1)
+            {
+                _name = name1;
+            }
+
+            public string Name()
+            {
+                return _name;
+            }
+
+            public void Name(string name)
+            {
+                _name = name;
+            }
+        }
     }
 }
